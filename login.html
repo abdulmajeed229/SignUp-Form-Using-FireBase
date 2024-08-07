@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
+<body>
+
+    <div class="box">
+
+        <h1>Log In</h1>
+
+        <p>Let's Get Started With Your Free Trials</p>
+
+        <input type="email" placeholder="Enter Email" required id="userEmailLogin">
+
+        <br><br>
+
+        <input type="password" placeholder="Enter Password" required id="userPassLogin">
+
+        <br><br>
+
+        <button id="btnn">Log In</button>
+
+        <br>
+        <br>
+
+        <span>Create an account? <a href="index.html">Create account</a></span>
+
+    </div>
+
+
+    <script type="module">
+
+
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDbolhohU87YZ6O5gBgfHH57dwOX_RcyyI",
+            authDomain: "myportfolio-c6266.firebaseapp.com",
+            projectId: "myportfolio-c6266",
+            storageBucket: "myportfolio-c6266.appspot.com",
+            messagingSenderId: "1073456922405",
+            appId: "1:1073456922405:web:3c919e2d429d31f820a4cc"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+
+        let passlogin = document.getElementById('userPassLogin');
+
+        let emaillogin = document.getElementById('userEmailLogin');
+
+        let btnn = document.getElementById('btnn');
+
+        import {  signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+
+
+        btnn.addEventListener('click', function () {
+
+
+            const auth = getAuth();
+
+            signInWithEmailAndPassword(auth, emaillogin.value, passlogin.value)
+
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+
+                    
+            Swal.fire("Login successful! Welcome back.");
+
+                    window.location.href = 'dashboard.html'
+
+                    // ...
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+
+                    Swal.fire("Login failed. Please check your credentials and try again.");
+
+                });
+
+
+
+           
+        });
+
+
+    </script>
+
+</body>
+
+</html>

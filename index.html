@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+</head>
+
+<body>
+
+    <div class="box">
+
+        <h1>Sign Up</h1>
+
+        <p>Let's Get Started With Your Free Trials</p>
+
+        <input type="text" placeholder="Enter Name" required id="name">
+
+        <br><br>
+
+        <input type="email" placeholder="Enter Email" required id="email">
+
+        <br><br>
+
+        
+        <input type="password" placeholder="Create Password" required id="password" > 
+
+        <br><br>
+
+        <button id="btn">Sign Up</button>
+
+        <br>
+        <br>
+
+        <span>Already have an account? <a href="login.html">login In</a></span>
+
+        <p class="com">By Signung up to create an account I accept Company's <br> <a target="_blank"
+                href="https://policies.google.com/terms?hl=en-US"> Terms Of Use and Privacy Policy.</a> </p>
+
+    </div>
+  
+
+    <script type="module">
+
+
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+  import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDbolhohU87YZ6O5gBgfHH57dwOX_RcyyI",
+    authDomain: "myportfolio-c6266.firebaseapp.com",
+    projectId: "myportfolio-c6266",
+    storageBucket: "myportfolio-c6266.appspot.com",
+    messagingSenderId: "1073456922405",
+    appId: "1:1073456922405:web:3c919e2d429d31f820a4cc"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  let name1 = document.getElementById('name')
+
+let email = document.querySelector('#email');
+
+let password = document.querySelector('#password')
+
+let btn = document.querySelector('#btn');
+
+ 
+import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+
+btn.addEventListener('click',  function () {
+
+    
+  
+
+    createUserWithEmailAndPassword(auth, email.value, password.value)
+
+        .then((userCredential) => {
+            // Signed up 
+            const user = userCredential.user;
+
+
+
+            Swal.fire("Form submitted successfully! Thank you.");
+
+
+            setTimeout(() => {
+                
+                window.location.href = 'login.html';
+
+            }, 500);
+
+            
+
+          
+
+            // ...
+        })
+
+        .catch((error) => {
+
+            const errorCode = error.code;
+            const errorMessage = error.message;
+
+            Swal.fire("Form submission failed. Please try again.");
+
+        });
+
+})
+
+
+  
+      </script>
+    
+
+</body>
+
+</html>
